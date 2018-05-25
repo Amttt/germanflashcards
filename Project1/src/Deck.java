@@ -6,12 +6,12 @@ import java.util.*;
 public class Deck {
 	public static final String DELIM = "\n";
 	public static void main(String[] args) throws FileNotFoundException {
-		// Initialize
-		Scanner keyboard = new Scanner(System.in);
-		Random r = new Random();
-		String germanWord[] = new String[1000];
+	// Initialize
+	Scanner keyboard = new Scanner(System.in);
+	Random r = new Random();
+	String germanWord[] = new String[1000];
         String englishWord[] = new String[1000];
-		int randomIndex = r.nextInt(1000);
+	int randomIndex = r.nextInt(1000);
         // Create German word array from csv
     	Scanner scanner = new Scanner(new File("/Users//annma//OneDrive//GERMANWORDFINALLIST.csv"));
         scanner.useDelimiter(DELIM);
@@ -19,25 +19,25 @@ public class Deck {
         while(scanner.hasNext())
         {
         	String s = scanner.next();
-        	if (s.contains("ü"))
+        	if (s.contains("Ã¼"))
         	{
-        		s = s.replaceAll("ü", "�"); 
+        		s = s.replaceAll("Ã¼", "ü"); 
         	}
-        	if (s.contains("ö"))
+        	if (s.contains("Ã¶"))
         	{
-        		s = s.replaceAll("ö", "�"); 
+        		s = s.replaceAll("Ã¶", "ö"); 
         	}
-        	if (s.contains("ä"))
+        	if (s.contains("Ã¤"))
         	{
-        		s = s.replaceAll("ä", "�"); 
+        		s = s.replaceAll("Ã¤", "ä"); 
         	}
-        	if (s.contains("ß"))
+        	if (s.contains("ÃŸ"))
         	{
-        		s = s.replaceAll("ß", "�"); 
+        		s = s.replaceAll("ÃŸ", "ß"); 
         	}
-        	if(s.contains("Ä"))
+        	if(s.contains("Ã„"))
         	{
-        		s = s.replaceAll("Ä", "�");
+        		s = s.replaceAll("Ã„", "Ä");
         	}
         	s = s.replace("\n", "").replace("\r", "");
         	germanWord[count] = s;
