@@ -55,81 +55,79 @@ public class Deck {
         	count2++;
         }
         scanner2.close();	   
-		// Get value for current game session deck size
-		System.out.println("Welcome to the German FlashCard System.\nChoose a deck size between 1 and 50.");
-		int studySessionCards = keyboard.nextInt();
-		if(studySessionCards > 50) 
-		{
-			System.out.println("Invalid number. Enter a number between 1 and 50.");
-			studySessionCards = keyboard.nextInt();
-		}
-		// Create array (deck) for current study session. 		
-		FlashCard[] sessionDeck = new FlashCard[studySessionCards];
-		Set<Integer> set = new HashSet<>(studySessionCards);
-		int num = 0;
-		while(num < studySessionCards) {
-			set.add(randomIndex);
+	// Get value for current game session deck size
+	System.out.println("Welcome to the German FlashCard System.\nChoose a deck size between 1 and 50.");
+	int studySessionCards = keyboard.nextInt();
+	if(studySessionCards > 50) 
+	{
+		System.out.println("Invalid number. Enter a number between 1 and 50.");
+		studySessionCards = keyboard.nextInt();
+	}
+	// Create array (deck) for current study session. 		
+	FlashCard[] sessionDeck = new FlashCard[studySessionCards];
+	Set<Integer> set = new HashSet<>(studySessionCards);
+	int num = 0;
+	while(num < studySessionCards) {
+		set.add(randomIndex);
+		randomIndex = r.nextInt(1000);
+		if(set.size() == num+1) {
 			randomIndex = r.nextInt(1000);
-			if(set.size() == num+1) {
-				randomIndex = r.nextInt(1000);
-				set.add(randomIndex);
-				num++;
-			}
-			else
-				randomIndex = r.nextInt(1000);
+			set.add(randomIndex);
+			num++;
 		}
-		// Create Integer array from the set of random numbers
-		Integer[] studyDeckArray = set.toArray(new Integer[set.size()]);
-		// Create study session deck using randomly chosen numbers from the set.
-		for(int i = 0; i < studySessionCards; i++) {
-			String germ = germanWord[studyDeckArray[i]];
-			String eng = englishWord[studyDeckArray[i]];
-			sessionDeck[i] = new FlashCard(germ, eng);
-		}			
-		// Create game loop
-		int count3 = 0; // New counter for session loop;
-		int helpCt = 0;
-		int incorrect = 0;
-		boolean sessionOver = false;
-		while(sessionOver == false)
-		{
-			System.out.println("Here is the deck to study. When ready, begin answering!");
-			for(int i=0;i<sessionDeck.length;i++)
-			{
-				System.out.println(sessionDeck[i]);
-			}
-			while(count3 < studySessionCards)
-			{
-				for(int i=0;i<sessionDeck.length;i++)
-				{
-					System.out.println("Here is the German word: "+sessionDeck[i].toStringGerman());
-					String answer = keyboard.nextLine();
-					answer = keyboard.next(); // Fix Java glitch
-					if(answer.toLowerCase().equals("hilfe"))
-					{
-						System.out.println("answer: "+sessionDeck[i].toStringEnglish());
-						helpCt++;
-						i = i-1;
-					}
-					else if(answer.equalsIgnoreCase(sessionDeck[i].toStringEnglish()))
-					{
-						System.out.println("Correct!");
-						count3++;
-					}
-					else
-					{
-						System.out.print("Incorrect!\n");
-						incorrect++;
-						i = i-1;
-					}
-				}
-			}
-			sessionOver = true; // Game loop is over
-		}
-		System.out.println("Congrats!\nYou asked for help "+helpCt+" times.\nYou answered incorrectly "+incorrect+" times.\nHere is the deck you just completed:");
-		for(int i=0;i<sessionDeck.length;i++) // Prints the previous session's deck list 
+		else
+			randomIndex = r.nextInt(1000);
+	}
+	// Create Integer array from the set of random numbers
+	Integer[] studyDeckArray = set.toArray(new Integer[set.size()]);
+	// Create study session deck using randomly chosen numbers from the set.
+	for(int i = 0; i < studySessionCards; i++) {
+		String germ = germanWord[studyDeckArray[i]];
+		String eng = englishWord[studyDeckArray[i]];
+		sessionDeck[i] = new FlashCard(germ, eng);
+	}			
+	// Create game loop
+	int count3 = 0; // New counter for session loop;
+	int helpCt = 0;
+	int incorrect = 0;
+	boolean sessionOver = false;
+	while(sessionOver == false)
+	{
+		System.out.println("Here is the deck to study. When ready, begin answering!");
+		for(int i=0;i<sessionDeck.length;i++)
 		{
 			System.out.println(sessionDeck[i]);
 		}
+		while(count3 < studySessionCards)
+		{
+			for(int i=0;i<sessionDeck.length;i++)
+			{
+				System.out.println("Here is the German word: "+sessionDeck[i].toStringGerman());
+				String answer = keyboard.nextLine();
+				answer = keyboard.next(); // Fix Java glitch
+				if(answer.toLowerCase().equals("hilfe"))
+				{
+					System.out.println("answer: "+sessionDeck[i].toStringEnglish());
+					helpCt++;
+					i = i-1;
+				}
+				else if(answer.equalsIgnoreCase(sessionDeck[i].toStringEnglish()))
+				{
+					System.out.println("Correct!");
+					count3++;
+				}
+				else
+				{
+					System.out.print("Incorrect!\n");
+					incorrect++;
+					i = i-1;
+				}
+			}
+		}
+		sessionOver = true; // Game loop is over
 	}
+	System.out.println("Congrats!\nYou asked for help "+helpCt+" times.\nYou answered incorrectly "+incorrect+" times.\nHere is the deck you just completed:");
+	for(int i=0;i<sessionDeck.length;i++) // Prints the previous session's deck list 
+		System.out.println(sessionDeck[i]);
+    }
 }
